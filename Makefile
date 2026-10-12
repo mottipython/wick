@@ -1,5 +1,5 @@
 # The Wick - a screensaver of Calca 3 from Neal Stephenson's "Anathem"
-VERSION  := 1.0.1
+VERSION  := 1.0.2
 PREFIX   ?= /usr
 SYSCONFDIR ?= /etc
 DESTDIR  ?=

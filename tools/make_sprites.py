@@ -69,6 +69,13 @@ def main():
     for i, p in enumerate(got):  # 0 the world of pure forms, 1 Arbre, 2 Urnud, 3 Tro, 4 Laterre, 5 Fthos
         save(p, 360, max(1, round(p.shape[0] * 360 / p.shape[1])), f"{OUT}/w{i}.png")
     print("worlds")
+    # Arbre and Urnud drawn again, with land that cannot be mistaken for Earth's
+    got = [trim(p) for p in pieces(key(load(f"{SRC}/redo.jpeg")), 1)]
+    if len(got) != 2:
+        raise SystemExit(f"redo: found {len(got)} drawings, expected 2")
+    for i, p in zip((1, 2), got):
+        save(p, 360, max(1, round(p.shape[0] * 360 / p.shape[1])), f"{OUT}/w{i}.png")
+    print("redo")
     got = [trim(p) for p in pieces(key(load(f"{SRC}/others.jpeg")), 4)]
     if len(got) != 16:
         raise SystemExit(f"others: found {len(got)} drawings, expected 16")
