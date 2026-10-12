@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=The Wick screensaver
+Comment=Start the Wick when the session has been idle
+Exec=wick-screensaver watch
+Icon=wick
+NoDisplay=true
+X-GNOME-Autostart-enabled=true

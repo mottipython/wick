@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=The Wick
+Comment=Worlds joined by threads of knowledge that flow one way
+Exec=wick
+TryExec=wick
+X-Screensaver-Standalone=true
+X-Screensaver-Snapshot=wick --snapshot %o --size %wx%h --time 60

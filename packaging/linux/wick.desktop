@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=The Wick
+Comment=Worlds joined by threads of knowledge that flow one way
+Exec=wick --window
+Icon=wick
+Categories=Game;LogicGame;Education;Math;
+Keywords=Anathem;Protism;cosmos;graph;screensaver;
