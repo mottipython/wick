@@ -4,8 +4,9 @@ under assets/art.
 
     tools/make_sprites.py
 
-worlds.jpeg is a sheet: six worlds in glass on one flat magenta background, not
-touching, read off in rows, left to right. sky.jpeg is the background. Needs
+worlds.jpeg and others.jpeg are sheets: worlds in glass on one flat magenta
+background, not touching, read off in rows, left to right. The first has the six
+from the book, the second sixteen with no names. sky.jpeg is the background. Needs
 ImageMagick and numpy.
 """
 import subprocess
@@ -68,6 +69,12 @@ def main():
     for i, p in enumerate(got):  # 0 the world of pure forms, 1 Arbre, 2 Urnud, 3 Tro, 4 Laterre, 5 Fthos
         save(p, 360, max(1, round(p.shape[0] * 360 / p.shape[1])), f"{OUT}/w{i}.png")
     print("worlds")
+    got = [trim(p) for p in pieces(key(load(f"{SRC}/others.jpeg")), 4)]
+    if len(got) != 16:
+        raise SystemExit(f"others: found {len(got)} drawings, expected 16")
+    for i, p in enumerate(got):  # sixteen worlds with no names, each different
+        save(p, 300, max(1, round(p.shape[0] * 300 / p.shape[1])), f"{OUT}/u{i}.png")
+    print("others")
     subprocess.run(["magick", f"{SRC}/sky.jpeg", "-resize", "1920x1080!", "-quality", "90", f"{OUT}/sky.jpg"], check=True)
     print("sky")
 

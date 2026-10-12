@@ -28,15 +28,17 @@ light running along every thread the way its arrow points.
 
 Then the Wick, a different one every time: worlds of pure forms on the left, and
 rank after rank of worlds to the right, every thread running from an earlier rank
-to a later one. Five worlds on it are named, and a spark climbs from one to the
+to a later one. No two of the nameless worlds look alike. Five worlds on it are named, and a spark climbs from one to the
 next against the flow: Urnud, Tro, Laterre, Fthos, Arbre, the road of the Daban
-Urnud.
+Urnud. The four home worlds are drawn as they are painted on the ship, told apart
+by their land: Urnud one great continent, Tro all islands, Laterre a continent at
+its southern pole, Fthos a belt round its equator.
 
 ### What is from the book and what is mine
 
 From the book: Simple and Complex Protism, the flow going one way only, the Wick as
 the general case, the nicknames Freight Train, Firing Squad and Strider, and the
-ship's road through those five worlds.
+ship's road through those five worlds, and how the four home worlds' land lies.
 
 Mine: the exact shape I have given each nicknamed diagram, which I drew from memory
 and from a summary and not from the book's own figures; that the ship climbs
@@ -48,7 +50,7 @@ Packages are on the [releases page](../../releases).
 
 ### Windows
 
-Run `Wick-Setup-1.0.0.exe`. It asks for administrator rights, because Windows
+Run `Wick-Setup-1.0.1.exe`. It asks for administrator rights, because Windows
 only lists screensavers that are in its own system folder. After that "The Wick" is in Screen Saver Settings with the others, already selected. Uninstall from
 Apps.
 
@@ -56,11 +58,11 @@ Apps.
 
 **Fedora, Nobara** (built on Fedora 44):
 
-    sudo dnf install ./wick-1.0.0-1.fc44.x86_64.rpm
+    sudo dnf install ./wick-1.0.1-1.fc44.x86_64.rpm
 
 **Debian, Ubuntu, Mint** (Ubuntu 24.04 / Debian 13 or later):
 
-    sudo apt install ./wick_1.0.0_amd64.deb
+    sudo apt install ./wick_1.0.1_amd64.deb
 
 From your next login it starts by itself after five minutes idle, and any key or
 mouse movement ends it. To start the watcher without logging out, or to change the

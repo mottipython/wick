@@ -57,8 +57,24 @@ ART(w2, "w2.png")
 ART(w3, "w3.png")
 ART(w4, "w4.png")
 ART(w5, "w5.png")
+ART(u0, "u0.png")
+ART(u1, "u1.png")
+ART(u2, "u2.png")
+ART(u3, "u3.png")
+ART(u4, "u4.png")
+ART(u5, "u5.png")
+ART(u6, "u6.png")
+ART(u7, "u7.png")
+ART(u8, "u8.png")
+ART(u9, "u9.png")
+ART(u10, "u10.png")
+ART(u11, "u11.png")
+ART(u12, "u12.png")
+ART(u13, "u13.png")
+ART(u14, "u14.png")
+ART(u15, "u15.png")
 
-enum { SP_SKY, SP_BANNER, SP_GLOW, SP_W0, SP_W1, SP_W2, SP_W3, SP_W4, SP_W5, NSPRITE };
+enum { SP_SKY, SP_BANNER, SP_GLOW, SP_W0, SP_W1, SP_W2, SP_W3, SP_W4, SP_W5, SP_U0, SP_U1, SP_U2, SP_U3, SP_U4, SP_U5, SP_U6, SP_U7, SP_U8, SP_U9, SP_U10, SP_U11, SP_U12, SP_U13, SP_U14, SP_U15, NSPRITE };
 static struct { const unsigned char *file, *end; int w, h; unsigned char *px; } sprite[NSPRITE] = {
     {art_sky, art_sky_end},
     {art_banner, art_banner_end},
@@ -69,6 +85,22 @@ static struct { const unsigned char *file, *end; int w, h; unsigned char *px; } 
     {art_w3, art_w3_end},
     {art_w4, art_w4_end},
     {art_w5, art_w5_end},
+    {art_u0, art_u0_end},
+    {art_u1, art_u1_end},
+    {art_u2, art_u2_end},
+    {art_u3, art_u3_end},
+    {art_u4, art_u4_end},
+    {art_u5, art_u5_end},
+    {art_u6, art_u6_end},
+    {art_u7, art_u7_end},
+    {art_u8, art_u8_end},
+    {art_u9, art_u9_end},
+    {art_u10, art_u10_end},
+    {art_u11, art_u11_end},
+    {art_u12, art_u12_end},
+    {art_u13, art_u13_end},
+    {art_u14, art_u14_end},
+    {art_u15, art_u15_end},
 };
 static SDL_Texture **cur_tex; /* the pictures, for the renderer being drawn to */
 
@@ -269,10 +301,8 @@ static double ease(double x) { return x * x * (3 - 2 * x); }
 
 static int add(double x, double y, int kind, const char *label, double born)
 {
-    /* the picture: 0 pure forms, 1 Arbre; any other world is one of three, and the
-     * ones the ship visits get their own below */
-    static const int PLAIN[3] = {2, 3, 5};
-    node[nn] = (Node){x, y, kind, label, born, 0, kind == HTW ? 0 : kind == ARBRE ? 1 : PLAIN[(int)(frand() * 3) % 3]};
+    /* the picture: 0 pure forms, 1 Arbre; the rest are given theirs when the diagram is done */
+    node[nn] = (Node){x, y, kind, label, born, 0, kind == HTW ? 0 : kind == ARBRE ? 1 : -1};
     return nn++;
 }
 static void join(int a, int b, double born)
@@ -287,7 +317,7 @@ static void build_wick(void)
     enum { RANKS = 6 };
     int first[RANKS + 1], count[RANKS];
     for (int r = 0; r < RANKS; r++) {
-        count[r] = r == 0 ? 3 : 3 + (int)(frand() * 3);
+        count[r] = r == 0 ? 3 : 3 + (int)(frand() * 2); /* never more nameless worlds than there are pictures */
         first[r] = nn;
         for (int k = 0; k < count[r]; k++) {
             double x = 0.04 + 0.92 * r / (RANKS - 1) + (frand() - 0.5) * 0.05;
@@ -314,7 +344,9 @@ static void build_wick(void)
     for (int step = 0; step < 5; step++) {
         climb[nclimb++] = at;
         node[at].label = NAMES[step];
-        node[at].pic = step == 4 ? 1 : step + 2; /* Urnud, Tro, Laterre, Fthos, and Arbre */
+        /* Urnud with its one continent, Tro all islands, Laterre with its polar
+         * continent, Fthos with its belt, and Arbre */
+        node[at].pic = step == 4 ? 1 : step + 2;
         if (step == 4) { node[at].kind = ARBRE; break; }
         int up = -1;
         for (int e = 0; e < ne; e++) if (edge[e].b == at && node[edge[e].a].layer == node[at].layer - 1) { up = edge[e].a; break; }
@@ -351,6 +383,11 @@ static void build(int which)
         break; }
     default: build_wick(); break;
     }
+    /* every world without a name gets a picture of its own: sixteen, dealt out at random */
+    int deck[16];
+    for (int i = 0; i < 16; i++) deck[i] = i;
+    for (int i = 15; i > 0; i--) { int j = (int)(frand() * (i + 1)) % (i + 1), t = deck[i]; deck[i] = deck[j]; deck[j] = t; }
+    for (int i = 0, dealt = 0; i < nn; i++) if (node[i].pic < 0) node[i].pic = 6 + deck[dealt++ % 16];
 }
 
 static void new_round(void) { T = 0; scene = -1; }
