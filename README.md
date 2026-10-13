@@ -1,7 +1,7 @@
 # The Wick
 
 A screensaver of the Wick, from Calca 3 of Neal Stephenson's novel *Anathem*. Runs
-on Linux, Windows and macOS.
+on Linux, Windows and macOS. One of the [Anathem screensavers](https://github.com/mottipython/anathem-screensavers).
 
 ![The Wick, with the Daban Urnud's road picked out](docs/screenshots/06-the-wick-climbed.jpg)
 
